@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -31,13 +33,12 @@ public class Comment {
     @JoinColumn(name = "project_num")
     private Project project;
 
-    @ManyToOne
-    @JoinColumn(name = "member_num")
-    private ProjectMember projectMember;
+    @Column(name = "member_num")
+    private Long memberNum;
 
-    @ManyToOne
-    @JoinColumn(name = "task_num")
-    private Task task;
+
+    @Column(name = "task_num")
+    private Long taskNum;
 
     @Column(name = "comment_content")
     private String commentContent;
@@ -52,10 +53,10 @@ public class Comment {
     private String memberName;
 
     @Builder(builderClassName = "CommentBuilder")
-    private Comment (Pk pk,  ProjectMember projectMember, Task task, String commentContent, LocalDateTime commentCreatedDt, String memberName) {
+    private Comment (Pk pk,  Long memberNum, Long taskNum, String commentContent, LocalDateTime commentCreatedDt, String memberName) {
         this.pk = pk;
-        this.projectMember = projectMember;
-        this.task = task;
+        this.memberNum = memberNum;
+        this.taskNum = taskNum;
         this.commentContent = commentContent;
         this.commentCreatedDt = commentCreatedDt;
         this.memberName = memberName;
@@ -68,9 +69,10 @@ public class Comment {
     @Getter
     @Setter
     @AllArgsConstructor
-    private static class Pk implements Serializable {
+    public static class Pk implements Serializable {
 
         @Column(name = "comment_num")
+        @GeneratedValue(strategy= GenerationType.IDENTITY)
         private Long commentNum;
 
         @Column(name = "project_num")

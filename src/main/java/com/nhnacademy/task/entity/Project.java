@@ -2,6 +2,8 @@ package com.nhnacademy.task.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Builder;
@@ -17,6 +19,7 @@ import lombok.Setter;
 public class Project {
     @Id
     @Column(name = "project_num")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long projectNum;
 
     @Column(name = "project_name")

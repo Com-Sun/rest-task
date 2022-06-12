@@ -22,7 +22,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "tag")
 public class Tag {
-
     @EmbeddedId
     private Pk pk;
 
@@ -31,14 +30,13 @@ public class Tag {
     @JoinColumn(name = "project_num")
     private Project project;
 
-    @ManyToOne
-    @JoinColumn(name = "task_num")
-    private Task task;
+    @Column(name = "task_num")
+    private Long taskNum;
 
     @Builder(builderClassName = "TagBuilder")
-    private Tag(Pk pk, Task task) {
+    private Tag(Pk pk, Long taskNum) {
         this.pk = pk;
-        this.task = task;
+        this.taskNum = taskNum;
     }
 
     @Getter
@@ -47,7 +45,7 @@ public class Tag {
     @NoArgsConstructor
     @AllArgsConstructor
     @Embeddable
-    private static class Pk implements Serializable {
+    public static class Pk implements Serializable {
 
         @Column(name = "tag_name")
         private String tagName;

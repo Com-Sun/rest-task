@@ -32,9 +32,8 @@ public class Milestone {
     @JoinColumn(name = "project_num")
     private Project project;
 
-    @ManyToOne
-    @JoinColumn(name = "task_num")
-    private Task task;
+    @Column(name = "task_num")
+    private Long taskNum;
 
     @Column(name = "milestone_status")
     private String milestoneStatus;
@@ -46,9 +45,9 @@ public class Milestone {
     private LocalDate milestoneEndDate;
 
     @Builder(builderClassName = "MilestoneBuilder")
-    private Milestone(Pk pk, Task task, String milestoneStatus, LocalDate milestoneStartDate, LocalDate milestoneEndDate) {
+    private Milestone(Pk pk, Long taskNum, String milestoneStatus, LocalDate milestoneStartDate, LocalDate milestoneEndDate) {
         this.pk = pk;
-        this.task = task;
+        this.taskNum = taskNum;
         this.milestoneStatus = milestoneStatus;
         this.milestoneStartDate = milestoneStartDate;
         this.milestoneEndDate = milestoneEndDate;
@@ -60,7 +59,7 @@ public class Milestone {
     @EqualsAndHashCode
     @NoArgsConstructor
     @AllArgsConstructor
-    private static class Pk implements Serializable {
+    public static class Pk implements Serializable {
 
         @Column(name = "milestone_name")
         private String milestoneName;

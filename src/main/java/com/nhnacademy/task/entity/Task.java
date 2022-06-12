@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -57,8 +59,9 @@ public class Task {
     @EqualsAndHashCode
     @Getter
     @Setter
-    private static class Pk implements Serializable {
+    public static class Pk implements Serializable {
         @Column(name = "task_num")
+        @GeneratedValue(strategy= GenerationType.IDENTITY)
         private Long taskNum;
 
         @Column(name = "project_num")

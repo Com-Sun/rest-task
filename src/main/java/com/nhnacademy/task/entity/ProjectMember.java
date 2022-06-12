@@ -49,7 +49,7 @@ public class ProjectMember {
     @EqualsAndHashCode
     @Getter
     @Setter
-    private static class Pk implements Serializable {
+    public static class Pk implements Serializable {
         @Column(name = "member_num")
         private Long memberNum;
 
