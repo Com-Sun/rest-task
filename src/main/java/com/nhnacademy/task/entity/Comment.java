@@ -33,10 +33,6 @@ public class Comment {
     @JoinColumn(name = "project_num")
     private Project project;
 
-    @Column(name = "member_num")
-    private Long memberNum;
-
-
     @Column(name = "task_num")
     private Long taskNum;
 
@@ -53,9 +49,9 @@ public class Comment {
     private String memberName;
 
     @Builder(builderClassName = "CommentBuilder")
-    private Comment (Pk pk,  Long memberNum, Long taskNum, String commentContent, LocalDateTime commentCreatedDt, String memberName) {
+    private Comment (Pk pk, Project project, Long taskNum, String commentContent, LocalDateTime commentCreatedDt, String memberName) {
         this.pk = pk;
-        this.memberNum = memberNum;
+        this.project = project;
         this.taskNum = taskNum;
         this.commentContent = commentContent;
         this.commentCreatedDt = commentCreatedDt;

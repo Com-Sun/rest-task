@@ -37,8 +37,9 @@ public class ProjectMember {
     private String memberName;
 
     @Builder(builderClassName = "ProjectMemberBuilder")
-    private ProjectMember(Pk pk, String projectAuth, String memberName) {
+    private ProjectMember(Pk pk, Project project, String projectAuth, String memberName) {
         this.pk = pk;
+        this.project = project;
         this.projectAuth = projectAuth;
         this.memberName = memberName;
     }

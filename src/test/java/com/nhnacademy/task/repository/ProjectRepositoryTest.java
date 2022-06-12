@@ -1,7 +1,6 @@
 package com.nhnacademy.task.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.nhnacademy.task.domain.dto.response.ProjectResponseDTO;
 import com.nhnacademy.task.entity.Project;
@@ -17,7 +16,6 @@ class ProjectRepositoryTest {
 
     @Autowired
     ProjectRepository projectRepository;
-
     private Project project;
 
     @BeforeEach
@@ -29,7 +27,7 @@ class ProjectRepositoryTest {
     }
 
     @Test
-    public void saveTest() {
+    public void findByProjectNameTest() {
         projectRepository.save(project);
         ProjectResponseDTO responseDTO = projectRepository.findByProjectName("Hyunjin Project");
         assertThat(responseDTO).isNotNull();

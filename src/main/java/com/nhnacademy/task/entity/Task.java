@@ -18,12 +18,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "task")
 @Entity
+@DynamicInsert
 public class Task {
     @EmbeddedId
     private Pk pk;
@@ -33,6 +35,8 @@ public class Task {
     @JoinColumn(name = "project_num")
     private Project project;
 
+    @Column(name = "task_created_mem_num")
+    private Long taskCreatedMemNum;
     @Column(name = "task_name")
     private String taskName;
     @Column(name = "task_content")
@@ -41,12 +45,12 @@ public class Task {
     private LocalDateTime taskCreatedDt;
     @Column(name = "task_modified_dt")
     private LocalDateTime taskModifiedDt;
-    @Column(name = "task_created_mem_num")
-    private Long taskCreatedMemNum;
+
 
     @Builder(builderClassName = "TaskBuilder")
-    private Task(Pk pk, String taskName, String taskContent, LocalDateTime taskCreatedDt, Long taskCreatedMemNum) {
+    private Task(Pk pk, Project project, String taskName, String taskContent, LocalDateTime taskCreatedDt, Long taskCreatedMemNum) {
         this.pk = pk;
+        this.project = project;
         this.taskName = taskName;
         this.taskContent = taskContent;
         this.taskCreatedDt = taskCreatedDt;

@@ -45,8 +45,9 @@ public class Milestone {
     private LocalDate milestoneEndDate;
 
     @Builder(builderClassName = "MilestoneBuilder")
-    private Milestone(Pk pk, Long taskNum, String milestoneStatus, LocalDate milestoneStartDate, LocalDate milestoneEndDate) {
+    private Milestone(Pk pk, Project project, Long taskNum, String milestoneStatus, LocalDate milestoneStartDate, LocalDate milestoneEndDate) {
         this.pk = pk;
+        this.project = project;
         this.taskNum = taskNum;
         this.milestoneStatus = milestoneStatus;
         this.milestoneStartDate = milestoneStartDate;

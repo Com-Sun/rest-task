@@ -34,7 +34,8 @@ public class Tag {
     private Long taskNum;
 
     @Builder(builderClassName = "TagBuilder")
-    private Tag(Pk pk, Long taskNum) {
+    private Tag(Pk pk, Project project, Long taskNum) {
+        this.project = project;
         this.pk = pk;
         this.taskNum = taskNum;
     }
