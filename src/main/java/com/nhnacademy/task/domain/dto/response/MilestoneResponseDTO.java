@@ -4,7 +4,7 @@ import com.nhnacademy.task.entity.Milestone;
 import com.nhnacademy.task.entity.Project;
 import java.time.LocalDate;
 
-public interface MilestoneResponseDto {
+public interface MilestoneResponseDTO {
 
     Milestone.Pk getPk();
     Project getProject();

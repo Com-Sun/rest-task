@@ -3,9 +3,8 @@ package com.nhnacademy.task.domain.dto.response;
 import com.nhnacademy.task.entity.Project;
 import com.nhnacademy.task.entity.Task;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
 
-public interface TaskResponseDto {
+public interface TaskResponseDTO {
 
     Task.Pk getPk();
     Project getProject();

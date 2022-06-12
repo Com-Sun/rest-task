@@ -1,11 +1,11 @@
 package com.nhnacademy.task.repository;
 
-import static java.time.LocalDate.now;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
-import com.nhnacademy.task.domain.dto.response.MilestoneResponseDTO;
-import com.nhnacademy.task.entity.Milestone;
+import com.nhnacademy.task.domain.dto.response.ProjectMemberResponseDTO;
 import com.nhnacademy.task.entity.Project;
+import com.nhnacademy.task.entity.ProjectMember;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,12 +15,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class MilestoneRepositoryTest {
+class ProjectMemberRepositoryTest {
 
     @Autowired
     ProjectRepository projectRepository;
     @Autowired
-    MilestoneRepository milestoneRepository;
+    ProjectMemberRepository projectMemberRepository;
     private Project project;
 
     @BeforeEach
@@ -29,25 +29,23 @@ class MilestoneRepositoryTest {
             .projectName("Hyunjin Project")
             .projectStatus("활성")
             .build();
+        projectRepository.saveAndFlush(project);
     }
 
     @Test
-    void findByPk_ProjectNumTest() {
-        projectRepository.saveAndFlush(project);
-
-        Milestone milestone = Milestone.builder()
-            .pk(new Milestone.Pk("안녕", project.getProjectNum()))
+    void findProjectMemberByProjectNumTest() {
+        ProjectMember projectMember = ProjectMember.builder()
+            .pk(new ProjectMember.Pk(1L, project.getProjectNum()))
             .project(project)
-            .milestoneStatus("활성")
-            .taskNum(1L)
-            .milestoneStartDate(now())
-            .milestoneEndDate(now())
+            .memberName("현진")
+            .projectAuth("관리자")
             .build();
 
-        milestoneRepository.save(milestone);
+        projectMemberRepository.save(projectMember);
 
-        List<MilestoneResponseDTO> responseDtoList = milestoneRepository.findByPk_ProjectNum(project.getProjectNum());
-        assertThat(responseDtoList).hasSize(1);
+        List<ProjectMemberResponseDTO> responseDTOS = projectMemberRepository.findByPk_ProjectNum(project.getProjectNum());
+
+        assertThat(responseDTOS).hasSize(1);
     }
 
 }
