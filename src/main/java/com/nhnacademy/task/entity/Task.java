@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,15 @@ public class Task {
     private LocalDateTime taskModifiedDt;
     @Column(name = "task_created_mem_num")
     private Long taskCreatedMemNum;
+
+    @Builder(builderClassName = "TaskBuilder")
+    private Task(Pk pk, String taskName, String taskContent, LocalDateTime taskCreatedDt, Long taskCreatedMemNum) {
+        this.pk = pk;
+        this.taskName = taskName;
+        this.taskContent = taskContent;
+        this.taskCreatedDt = taskCreatedDt;
+        this.taskCreatedMemNum = taskCreatedMemNum;
+    }
 
     @Embeddable
     @NoArgsConstructor

@@ -1,7 +1,6 @@
 package com.nhnacademy.task.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -21,8 +20,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "comment")
-public class Comment {
+@Table(name = "tag")
+public class Tag {
+
     @EmbeddedId
     private Pk pk;
 
@@ -32,47 +32,25 @@ public class Comment {
     private Project project;
 
     @ManyToOne
-    @JoinColumn(name = "member_num")
-    private ProjectMember projectMember;
-
-    @ManyToOne
     @JoinColumn(name = "task_num")
     private Task task;
 
-    @Column(name = "comment_content")
-    private String commentContent;
-
-    @Column(name = "comment_created_dt")
-    private LocalDateTime commentCreatedDt;
-
-    @Column(name = "comment_modified_dt")
-    private LocalDateTime commentModifiedDt;
-
-    @Column(name = "member_name")
-    private String memberName;
-
-    @Builder(builderClassName = "CommentBuilder")
-    private Comment (Pk pk,  ProjectMember projectMember, Task task, String commentContent, LocalDateTime commentCreatedDt, String memberName) {
+    @Builder(builderClassName = "TagBuilder")
+    private Tag(Pk pk, Task task) {
         this.pk = pk;
-        this.projectMember = projectMember;
         this.task = task;
-        this.commentContent = commentContent;
-        this.commentCreatedDt = commentCreatedDt;
-        this.memberName = memberName;
     }
 
-
-    @Embeddable
-    @NoArgsConstructor
-    @EqualsAndHashCode
     @Getter
     @Setter
+    @EqualsAndHashCode
+    @NoArgsConstructor
     @AllArgsConstructor
+    @Embeddable
     private static class Pk implements Serializable {
 
-        @Column(name = "comment_num")
-        private Long commentNum;
-
+        @Column(name = "tag_name")
+        private String tagName;
         @Column(name = "project_num")
         private Long projectNum;
     }

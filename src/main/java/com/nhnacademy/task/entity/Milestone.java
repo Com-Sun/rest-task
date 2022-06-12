@@ -1,7 +1,7 @@
 package com.nhnacademy.task.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -20,9 +20,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "milestone")
 @Entity
-@Table(name = "comment")
-public class Comment {
+public class Milestone {
+
     @EmbeddedId
     private Pk pk;
 
@@ -32,47 +33,37 @@ public class Comment {
     private Project project;
 
     @ManyToOne
-    @JoinColumn(name = "member_num")
-    private ProjectMember projectMember;
-
-    @ManyToOne
     @JoinColumn(name = "task_num")
     private Task task;
 
-    @Column(name = "comment_content")
-    private String commentContent;
+    @Column(name = "milestone_status")
+    private String milestoneStatus;
 
-    @Column(name = "comment_created_dt")
-    private LocalDateTime commentCreatedDt;
+    @Column(name = "milestone_start_date")
+    private LocalDate milestoneStartDate;
 
-    @Column(name = "comment_modified_dt")
-    private LocalDateTime commentModifiedDt;
+    @Column(name = "milestone_end_date")
+    private LocalDate milestoneEndDate;
 
-    @Column(name = "member_name")
-    private String memberName;
-
-    @Builder(builderClassName = "CommentBuilder")
-    private Comment (Pk pk,  ProjectMember projectMember, Task task, String commentContent, LocalDateTime commentCreatedDt, String memberName) {
+    @Builder(builderClassName = "MilestoneBuilder")
+    private Milestone(Pk pk, Task task, String milestoneStatus, LocalDate milestoneStartDate, LocalDate milestoneEndDate) {
         this.pk = pk;
-        this.projectMember = projectMember;
         this.task = task;
-        this.commentContent = commentContent;
-        this.commentCreatedDt = commentCreatedDt;
-        this.memberName = memberName;
+        this.milestoneStatus = milestoneStatus;
+        this.milestoneStartDate = milestoneStartDate;
+        this.milestoneEndDate = milestoneEndDate;
     }
 
-
     @Embeddable
-    @NoArgsConstructor
-    @EqualsAndHashCode
     @Getter
     @Setter
+    @EqualsAndHashCode
+    @NoArgsConstructor
     @AllArgsConstructor
     private static class Pk implements Serializable {
 
-        @Column(name = "comment_num")
-        private Long commentNum;
-
+        @Column(name = "milestone_name")
+        private String milestoneName;
         @Column(name = "project_num")
         private Long projectNum;
     }
