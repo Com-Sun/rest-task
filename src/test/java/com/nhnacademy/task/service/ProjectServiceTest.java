@@ -43,7 +43,6 @@ class ProjectServiceTest {
             .projectName("현진아 가즈아")
             .build();
 
-
     }
 
     @Test

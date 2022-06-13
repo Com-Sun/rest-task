@@ -30,14 +30,15 @@ public class Tag {
     @JoinColumn(name = "project_num")
     private Project project;
 
-    @Column(name = "task_num")
-    private Long taskNum;
+    @ManyToOne
+    @JoinColumn(name = "task_num")
+    private Task task;
 
     @Builder(builderClassName = "TagBuilder")
-    private Tag(Pk pk, Project project, Long taskNum) {
+    private Tag(Pk pk, Project project, Task task) {
         this.project = project;
         this.pk = pk;
-        this.taskNum = taskNum;
+        this.task = task;
     }
 
     @Getter

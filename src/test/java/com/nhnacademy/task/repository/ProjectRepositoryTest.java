@@ -21,7 +21,6 @@ class ProjectRepositoryTest {
     @BeforeEach
     void setUp() {
         project = Project.builder()
-            .projectNum(1L)
             .projectName("Hyunjin Project")
             .build();
         projectRepository.save(project);

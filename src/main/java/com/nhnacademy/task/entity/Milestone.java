@@ -32,8 +32,9 @@ public class Milestone {
     @JoinColumn(name = "project_num")
     private Project project;
 
-    @Column(name = "task_num")
-    private Long taskNum;
+    @ManyToOne
+    @JoinColumn(name = "task_num")
+    private Task task;
 
     @Column(name = "milestone_status")
     private String milestoneStatus;
@@ -45,10 +46,10 @@ public class Milestone {
     private LocalDate milestoneEndDate;
 
     @Builder(builderClassName = "MilestoneBuilder")
-    private Milestone(Pk pk, Project project, Long taskNum, String milestoneStatus, LocalDate milestoneStartDate, LocalDate milestoneEndDate) {
+    private Milestone(Pk pk, Project project, Task task, String milestoneStatus, LocalDate milestoneStartDate, LocalDate milestoneEndDate) {
         this.pk = pk;
         this.project = project;
-        this.taskNum = taskNum;
+        this.task = task;
         this.milestoneStatus = milestoneStatus;
         this.milestoneStartDate = milestoneStartDate;
         this.milestoneEndDate = milestoneEndDate;

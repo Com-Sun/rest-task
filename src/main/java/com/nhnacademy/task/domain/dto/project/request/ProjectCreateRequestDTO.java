@@ -7,6 +7,5 @@ import lombok.Data;
 @Builder
 public class ProjectCreateRequestDTO {
 
-    private Long projectNum;
     private String projectName;
 }

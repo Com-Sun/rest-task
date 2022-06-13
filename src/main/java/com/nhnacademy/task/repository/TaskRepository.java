@@ -9,4 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<TaskResponseDTO> findByProject_ProjectNum(Long projectNum);
+
+    TaskResponseDTO queryByTaskNum(Long taskNum);
+
+    List<TaskResponseDTO> findAllBy();
 }
