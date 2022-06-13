@@ -2,19 +2,24 @@ package com.nhnacademy.task.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "project")
 @Entity
+@DynamicInsert
 public class Project {
+
     @Id
     @Column(name = "project_num")
     private Long projectNum;
@@ -26,9 +31,8 @@ public class Project {
     private String projectStatus;
 
     @Builder(builderClassName = "ProjectBuilder")
-    private Project (Long projectNum, String projectName, String projectStatus) {
+    private Project (Long projectNum, String projectName) {
         this.projectNum = projectNum;
         this.projectName = projectName;
-        this.projectStatus = projectStatus;
     }
 }
