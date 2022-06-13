@@ -1,10 +1,12 @@
 package com.nhnacademy.task.repository;
 
+import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.nhnacademy.task.domain.dto.response.CommentResponseDTO;
 import com.nhnacademy.task.entity.Comment;
 import com.nhnacademy.task.entity.Project;
+import com.nhnacademy.task.entity.Task;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,9 +20,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 class CommentRepositoryTest {
 
     @Autowired
-    ProjectRepository projectRepository;
+    TaskRepository taskRepository;
     @Autowired
     CommentRepository commentRepository;
+    @Autowired
+    ProjectRepository projectRepository;
+    private Task task;
     private Project project;
 
     @BeforeEach
@@ -29,6 +34,15 @@ class CommentRepositoryTest {
             .projectName("Hyunjin Project")
             .projectStatus("활성")
             .build();
+        projectRepository.save(project);
+
+        task = Task.builder()
+            .taskCreatedMemNum(1L)
+            .taskCreatedDt(now())
+            .taskName("현진아 일하자")
+            .taskContent("가즈아")
+            .project(project)
+            .build();
     }
 
     @Test
@@ -36,17 +50,17 @@ class CommentRepositoryTest {
         projectRepository.saveAndFlush(project);
 
         Comment comment = Comment.builder()
-            .pk(new Comment.Pk(1L, project.getProjectNum()))
-            .project(project)
-            .commentCreatedDt(LocalDateTime.now())
-            .taskNum(1L)
+            .task(task)
+            .commentCreatedDt(now())
             .memberName("현진")
             .commentContent("안녕")
             .build();
 
+        taskRepository.saveAndFlush(task);
+
         commentRepository.save(comment);
 
-        List<CommentResponseDTO> respondDtoList = commentRepository.findByPk_ProjectNum(project.getProjectNum());
+        List<CommentResponseDTO> respondDtoList = commentRepository.findByTask_TaskNum(task.getTaskNum());
 
         assertThat(respondDtoList).hasSize(1);
 

@@ -43,7 +43,6 @@ class TaskRepositoryTest {
         projectRepository.saveAndFlush(project);
 
         task = Task.builder()
-            .pk(new Task.Pk(1L, project.getProjectNum()))
             .project(project)
             .taskContent("일할시간")
             .taskCreatedDt(now())
@@ -52,7 +51,6 @@ class TaskRepositoryTest {
             .build();
 
         task2 = Task.builder()
-            .pk(new Task.Pk(2L, project.getProjectNum()))
             .project(project)
             .taskContent("일할시간")
             .taskCreatedDt(now())
@@ -63,7 +61,7 @@ class TaskRepositoryTest {
         taskRepository.saveAndFlush(task);
         taskRepository.saveAndFlush(task2);
 
-        List<TaskResponseDTO> dtoList =  taskRepository.findByPk_ProjectNum(project.getProjectNum());
+        List<TaskResponseDTO> dtoList =  taskRepository.findByProject_ProjectNum(project.getProjectNum());
         assertThat(dtoList).hasSize(2);
     }
 

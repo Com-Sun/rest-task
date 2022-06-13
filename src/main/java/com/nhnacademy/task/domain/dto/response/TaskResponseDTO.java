@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public interface TaskResponseDTO {
 
-    Task.Pk getPk();
+    Long getTaskNum();
     Project getProject();
     String getTaskName();
     String getTaskContent();

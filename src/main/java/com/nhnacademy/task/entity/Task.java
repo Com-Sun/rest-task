@@ -8,6 +8,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -27,14 +28,14 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @DynamicInsert
 public class Task {
-    @EmbeddedId
-    private Pk pk;
 
-    @MapsId("projectNum")
+    @Id
+    @Column(name = "task_num")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long taskNum;
     @ManyToOne
     @JoinColumn(name = "project_num")
     private Project project;
-
     @Column(name = "task_created_mem_num")
     private Long taskCreatedMemNum;
     @Column(name = "task_name")
@@ -46,29 +47,12 @@ public class Task {
     @Column(name = "task_modified_dt")
     private LocalDateTime taskModifiedDt;
 
-
     @Builder(builderClassName = "TaskBuilder")
-    private Task(Pk pk, Project project, String taskName, String taskContent, LocalDateTime taskCreatedDt, Long taskCreatedMemNum) {
-        this.pk = pk;
+    private Task(Project project, String taskName, String taskContent, LocalDateTime taskCreatedDt, Long taskCreatedMemNum) {
         this.project = project;
         this.taskName = taskName;
         this.taskContent = taskContent;
         this.taskCreatedDt = taskCreatedDt;
         this.taskCreatedMemNum = taskCreatedMemNum;
-    }
-
-    @Embeddable
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @EqualsAndHashCode
-    @Getter
-    @Setter
-    public static class Pk implements Serializable {
-        @Column(name = "task_num")
-        @GeneratedValue(strategy= GenerationType.IDENTITY)
-        private Long taskNum;
-
-        @Column(name = "project_num")
-        private Long projectNum;
     }
 }
