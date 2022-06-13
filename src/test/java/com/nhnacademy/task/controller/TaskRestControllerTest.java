@@ -77,7 +77,6 @@ class TaskRestControllerTest {
             .taskContent("졸려")
             .taskName("더졸려")
             .taskCreatedMemNum(1L)
-            .taskCreatedDt(now())
             .build();
 
         String requestBody = mapper.writeValueAsString(requestDTO);
@@ -115,10 +114,8 @@ class TaskRestControllerTest {
             .willReturn(Optional.of(task));
 
         TaskModifyRequestDTO requestDTO = TaskModifyRequestDTO.builder()
-            .taskModifiedDt(now())
             .taskContent("졸려잉")
             .projectNum(1L)
-            .taskNum(1L)
             .taskName("흐흐")
             .build();
 

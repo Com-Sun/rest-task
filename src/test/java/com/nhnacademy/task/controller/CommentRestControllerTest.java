@@ -1,6 +1,7 @@
 package com.nhnacademy.task.controller;
 
 import static java.time.LocalDateTime.now;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -24,11 +25,13 @@ import com.nhnacademy.task.entity.Task;
 import com.nhnacademy.task.repository.CommentRepository;
 import com.nhnacademy.task.repository.ProjectRepository;
 import com.nhnacademy.task.repository.TaskRepository;
+import java.util.Objects;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindException;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -89,7 +92,6 @@ class CommentRestControllerTest {
         CommentCreateRequestDTO requestDTO = CommentCreateRequestDTO.builder()
             .commentContent("으악")
             .memberName("현진")
-            .commentCreatedDt(now())
             .taskNum(1L)
             .build();
 
@@ -121,14 +123,21 @@ class CommentRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
+    @DisplayName("API - commentNotFoundException 테스트")
+    @Test
+    void readCommentThrowsCommentNotFoundExceptionTest() throws Exception {
+        assertThatThrownBy(() -> this.mvc.perform(
+            get("/comments/{commentNum}", 7543L)
+        )).hasMessageContaining("해당 댓글이 존재하지 않습니다.");
+    }
+
+
     @DisplayName("API - comment 수정 테스트")
     @Test
     void modifyCommentTest() throws Exception {
 
         CommentModifyRequestDTO requestDTO = CommentModifyRequestDTO.builder()
-            .commentNum(1L)
             .commentContent("gk")
-            .commentModifiedDt(now())
             .commentContent("aa")
             .build();
 

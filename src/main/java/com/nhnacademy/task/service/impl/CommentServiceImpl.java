@@ -45,7 +45,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentResponseDTO readComment(CommentReadRequestDTO readRequestDTO) {
-        return commentRepository.queryByCommentNum(readRequestDTO.getCommentNum());
+        Comment comment = commentRepository.findById(readRequestDTO.getCommentNum()).orElseThrow(() -> new CommentNotFoundException("해당 댓글이 존재하지 않습니다."));
+
+        return commentRepository.queryByCommentNum(comment.getCommentNum());
     }
 
     @Override
