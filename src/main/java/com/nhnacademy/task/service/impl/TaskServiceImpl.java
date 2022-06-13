@@ -1,11 +1,12 @@
 package com.nhnacademy.task.service.impl;
 
-import com.nhnacademy.task.domain.dto.response.TaskResponseDTO;
-import com.nhnacademy.task.domain.dto.task.TaskCreateRequestDTO;
-import com.nhnacademy.task.domain.dto.task.TaskModifyRequestDTO;
-import com.nhnacademy.task.domain.dto.task.TaskReadRequestDTO;
+import com.nhnacademy.task.domain.dto.task.response.TaskResponseDTO;
+import com.nhnacademy.task.domain.dto.task.request.TaskCreateRequestDTO;
+import com.nhnacademy.task.domain.dto.task.request.TaskModifyRequestDTO;
+import com.nhnacademy.task.domain.dto.task.request.TaskReadRequestDTO;
 import com.nhnacademy.task.entity.Task;
 import com.nhnacademy.task.exception.ProjectNotFoundException;
+import com.nhnacademy.task.exception.TaskNotFoundException;
 import com.nhnacademy.task.repository.ProjectRepository;
 import com.nhnacademy.task.repository.TaskRepository;
 import com.nhnacademy.task.service.TaskService;
@@ -50,11 +51,20 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponseDTO updateTask(TaskModifyRequestDTO modifyRequestDto) {
-        return null;
+
+        Task task = taskRepository.findById(modifyRequestDto.getTaskNum()).orElseThrow(() -> new TaskNotFoundException("해당 업무가 존재하지 않습니다."));
+        task.setTaskContent(modifyRequestDto.getTaskContent());
+        task.setTaskName(modifyRequestDto.getTaskName());
+        task.setTaskModifiedDt(modifyRequestDto.getTaskModifiedDt());
+        taskRepository.save(task);
+
+        return taskRepository.queryByTaskNum(task.getTaskNum());
     }
 
     @Override
     public boolean deleteTask(Long taskNum) {
-        return false;
+        taskRepository.delete(taskRepository.findById(taskNum).orElseThrow(() -> new TaskNotFoundException("해당 업무가 존재하지 않습니다.")));
+
+        return true;
     }
 }

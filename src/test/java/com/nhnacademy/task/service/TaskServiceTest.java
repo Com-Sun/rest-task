@@ -1,14 +1,15 @@
 package com.nhnacademy.task.service;
 
 import static java.time.LocalDateTime.now;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
-import com.nhnacademy.task.domain.dto.task.TaskCreateRequestDTO;
-import com.nhnacademy.task.domain.dto.task.TaskModifyRequestDTO;
-import com.nhnacademy.task.domain.dto.task.TaskReadRequestDTO;
+import com.nhnacademy.task.domain.dto.task.request.TaskCreateRequestDTO;
+import com.nhnacademy.task.domain.dto.task.request.TaskModifyRequestDTO;
+import com.nhnacademy.task.domain.dto.task.request.TaskReadRequestDTO;
 import com.nhnacademy.task.entity.Project;
 import com.nhnacademy.task.entity.Task;
 import com.nhnacademy.task.repository.ProjectRepository;
@@ -86,10 +87,32 @@ class TaskServiceTest {
 
     @Test
     void updateTask() {
-//        TaskModifyRequestDTO taskModifyRequestDTO = TaskModifyRequestDTO;
+
+        given(taskRepository.findById(any()))
+            .willReturn(Optional.of(task));
+
+        TaskModifyRequestDTO taskModifyRequestDTO = TaskModifyRequestDTO.builder()
+            .taskModifiedDt(now())
+            .taskName("수정맨")
+            .taskNum(1L)
+            .projectNum(1L)
+            .taskContent("수정요")
+            .build();
+
+        taskService.updateTask(taskModifyRequestDTO);
+        verify(taskRepository, atLeastOnce()).queryByTaskNum(any());
+        verify(taskRepository, atLeastOnce()).save(any());
+        verify(taskRepository, atLeastOnce()).findById(any());
     }
 
     @Test
     void deleteTask() {
+        given(taskRepository.findById(any()))
+            .willReturn(Optional.of(task));
+
+        boolean isTrue = taskService.deleteTask(task.getTaskNum());
+
+        assertThat(isTrue).isTrue();
+        verify(taskRepository, atLeastOnce()).delete(any());
     }
 }

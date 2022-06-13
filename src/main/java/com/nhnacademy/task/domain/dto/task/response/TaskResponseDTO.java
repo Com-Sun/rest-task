@@ -1,4 +1,4 @@
-package com.nhnacademy.task.domain.dto.response;
+package com.nhnacademy.task.domain.dto.task.response;
 
 import com.nhnacademy.task.entity.Project;
 import com.nhnacademy.task.entity.Task;

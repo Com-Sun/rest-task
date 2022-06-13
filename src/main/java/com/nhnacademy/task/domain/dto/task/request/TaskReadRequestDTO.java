@@ -1,4 +1,4 @@
-package com.nhnacademy.task.domain.dto.task;
+package com.nhnacademy.task.domain.dto.task.request;
 
 import lombok.Builder;
 import lombok.Data;

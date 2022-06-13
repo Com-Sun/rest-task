@@ -1,9 +1,9 @@
 package com.nhnacademy.task.service;
 
-import com.nhnacademy.task.domain.dto.response.TaskResponseDTO;
-import com.nhnacademy.task.domain.dto.task.TaskCreateRequestDTO;
-import com.nhnacademy.task.domain.dto.task.TaskModifyRequestDTO;
-import com.nhnacademy.task.domain.dto.task.TaskReadRequestDTO;
+import com.nhnacademy.task.domain.dto.task.response.TaskResponseDTO;
+import com.nhnacademy.task.domain.dto.task.request.TaskCreateRequestDTO;
+import com.nhnacademy.task.domain.dto.task.request.TaskModifyRequestDTO;
+import com.nhnacademy.task.domain.dto.task.request.TaskReadRequestDTO;
 import java.util.List;
 
 public interface TaskService {

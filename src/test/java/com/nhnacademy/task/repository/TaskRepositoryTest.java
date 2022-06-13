@@ -3,7 +3,7 @@ package com.nhnacademy.task.repository;
 import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.nhnacademy.task.domain.dto.response.TaskResponseDTO;
+import com.nhnacademy.task.domain.dto.task.response.TaskResponseDTO;
 import com.nhnacademy.task.entity.Project;
 import com.nhnacademy.task.entity.Task;
 import java.util.List;

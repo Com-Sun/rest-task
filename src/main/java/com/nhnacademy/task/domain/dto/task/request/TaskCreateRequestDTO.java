@@ -1,4 +1,4 @@
-package com.nhnacademy.task.domain.dto.task;
+package com.nhnacademy.task.domain.dto.task.request;
 
 import java.time.LocalDateTime;
 import lombok.Builder;
