@@ -3,11 +3,10 @@ package com.nhnacademy.task.repository;
 import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.nhnacademy.task.domain.dto.response.CommentResponseDTO;
+import com.nhnacademy.task.domain.dto.comment.response.CommentResponseDTO;
 import com.nhnacademy.task.entity.Comment;
 import com.nhnacademy.task.entity.Project;
 import com.nhnacademy.task.entity.Task;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,11 +19,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 class CommentRepositoryTest {
 
     @Autowired
-    TaskRepository taskRepository;
+    private TaskRepository taskRepository;
     @Autowired
-    CommentRepository commentRepository;
+    private CommentRepository commentRepository;
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
     private Task task;
     private Project project;
 

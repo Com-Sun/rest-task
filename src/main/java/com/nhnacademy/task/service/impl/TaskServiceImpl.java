@@ -18,9 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
-
     private final TaskRepository taskRepository;
-
     private final ProjectRepository projectRepository;
 
     @Override
@@ -33,12 +31,10 @@ public class TaskServiceImpl implements TaskService {
             .taskContent(createRequestDTO.getTaskContent())
             .project(projectRepository.findById(createRequestDTO.getProjectNum()).orElseThrow(() -> new ProjectNotFoundException("해당 프로젝트가 존재하지 않습니다.")))
             .build();
-
         taskRepository.save(task);
 
         return taskRepository.queryByTaskNum(task.getTaskNum());
     }
-
     @Override
     public List<TaskResponseDTO> readAllTask() {
         return taskRepository.findAllBy();

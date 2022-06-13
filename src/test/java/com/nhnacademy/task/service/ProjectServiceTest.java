@@ -24,13 +24,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 class ProjectServiceTest {
 
     @Autowired
-    ProjectService projectService;
+    private ProjectService projectService;
 
     @MockBean
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
-    Project project;
-    ProjectCreateRequestDTO projectCreateRequestDTO;
+    private Project project;
+    private ProjectCreateRequestDTO projectCreateRequestDTO;
 
 
     @BeforeEach

@@ -25,15 +25,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 class TaskServiceTest {
 
     @MockBean
-    TaskRepository taskRepository;
+    private TaskRepository taskRepository;
     @Autowired
-    TaskService taskService;
+    private TaskService taskService;
 
     @MockBean
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
-    Task task;
-    Project project;
+    private Task task;
+    private Project project;
 
     @BeforeEach
     void setUp() {

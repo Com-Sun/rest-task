@@ -18,9 +18,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 class ProjectMemberRepositoryTest {
 
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
     @Autowired
-    ProjectMemberRepository projectMemberRepository;
+    private ProjectMemberRepository projectMemberRepository;
     private Project project;
 
     @BeforeEach
