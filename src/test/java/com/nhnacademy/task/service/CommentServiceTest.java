@@ -66,9 +66,7 @@ class CommentServiceTest {
             .willReturn(Optional.of(task));
 
         CommentCreateRequestDTO createRequestDTO = CommentCreateRequestDTO.builder()
-            .commentNum(1L)
             .commentContent("안녕난여")
-            .commentCreatedDt(now())
             .taskNum(1L)
             .memberName("현진짱")
             .build();
@@ -101,12 +99,10 @@ class CommentServiceTest {
             .willReturn(Optional.of(comment));
 
         CommentModifyRequestDTO modifyRequestDTO = CommentModifyRequestDTO.builder()
-            .commentModifiedDt(now())
             .commentContent("수정맨")
-            .commentNum(1L)
             .build();
 
-        commentService.updateComment(modifyRequestDTO);
+        commentService.updateComment(1L, modifyRequestDTO);
 
         verify(commentRepository, atLeastOnce()).findById(any());
         verify(commentRepository, atLeastOnce()).queryByCommentNum(any());

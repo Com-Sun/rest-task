@@ -50,7 +50,7 @@ public class ProjectRestController {
     public ProjectResponseDTO modifyProject(@PathVariable(name = "projectNum") Long projectNum, @RequestBody
                                             ProjectModifyRequestDTO requestDTO) {
 
-        return projectService.updateProject(requestDTO);
+        return projectService.updateProject(projectNum, requestDTO);
     }
 
     @DeleteMapping(value = "/projects/{projectNum}")

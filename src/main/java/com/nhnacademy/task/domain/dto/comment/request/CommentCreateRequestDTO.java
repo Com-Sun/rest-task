@@ -8,10 +8,8 @@ import lombok.Data;
 @Builder
 public class CommentCreateRequestDTO {
 
-    private Long commentNum;
     private Long taskNum;
     private String memberName;
     private String commentContent;
-    private LocalDateTime commentCreatedDt;
 
 }

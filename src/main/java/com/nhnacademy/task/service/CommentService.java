@@ -14,7 +14,7 @@ public interface CommentService {
 
     CommentResponseDTO readComment(CommentReadRequestDTO readRequestDTO);
 
-    CommentResponseDTO updateComment(CommentModifyRequestDTO updateRequestDTO);
+    CommentResponseDTO updateComment(Long commentNum, CommentModifyRequestDTO updateRequestDTO);
 
     boolean deleteComment(Long commentNum);
 }

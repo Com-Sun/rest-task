@@ -58,7 +58,6 @@ class TaskServiceTest {
         TaskCreateRequestDTO createRequestDTO = TaskCreateRequestDTO.builder()
             .taskContent("일할 시간이다")
             .taskName("현진아")
-            .taskCreatedDt(now())
             .taskCreatedMemNum(1L)
             .projectNum(1L)
             .build();
@@ -92,14 +91,12 @@ class TaskServiceTest {
             .willReturn(Optional.of(task));
 
         TaskModifyRequestDTO taskModifyRequestDTO = TaskModifyRequestDTO.builder()
-            .taskModifiedDt(now())
             .taskName("수정맨")
-            .taskNum(1L)
             .projectNum(1L)
             .taskContent("수정요")
             .build();
 
-        taskService.updateTask(taskModifyRequestDTO);
+        taskService.updateTask(1L, taskModifyRequestDTO);
         verify(taskRepository, atLeastOnce()).queryByTaskNum(any());
         verify(taskRepository, atLeastOnce()).save(any());
         verify(taskRepository, atLeastOnce()).findById(any());

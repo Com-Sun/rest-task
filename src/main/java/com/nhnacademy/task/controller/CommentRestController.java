@@ -53,7 +53,7 @@ public class CommentRestController {
     public CommentResponseDTO modifyComment(@PathVariable(name = "commentNum") Long commentNum, @RequestBody
     CommentModifyRequestDTO requestDTO) {
 
-        return commentService.updateComment(requestDTO);
+        return commentService.updateComment(commentNum, requestDTO);
     }
 
     @DeleteMapping(value = "/comments/{commentNum}")

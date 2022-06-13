@@ -1,0 +1,38 @@
+POST /comments HTTP/1.1
+Host: localhost:8089
+Content-Type: application/json
+
+{
+  "taskNum": 1,
+  "memberName": "현쥔",
+  "commentContent": "프로젝트 가자~",
+  "taskContent": "멀리가자~"
+}
+
+###
+
+GET /comments HTTP/1.1
+Host: localhost:8089
+Content-Type: application/json
+
+###
+
+GET /comments/1 HTTP/1.1
+Host: localhost:8089
+Content-Type: application/json
+
+###
+
+PUT /comments/1 HTTP/1.1
+Host: localhost:8089
+Content-Type: application/json
+
+{
+  "commentContent": "너무재밌어 짜릿해"
+}
+
+###
+
+DELETE /tasks/1 HTTP/1.1
+Host: localhost:8089
+Content-Type: app

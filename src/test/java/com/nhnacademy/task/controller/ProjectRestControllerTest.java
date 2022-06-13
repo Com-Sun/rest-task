@@ -86,7 +86,6 @@ class ProjectRestControllerTest {
 
         ProjectModifyRequestDTO projectModifyRequestDTO = ProjectModifyRequestDTO.builder()
             .projectName("이걸로바꾸자")
-            .projectNum(1L)
             .build();
 
         String requestBody = mapper.writeValueAsString(projectModifyRequestDTO);

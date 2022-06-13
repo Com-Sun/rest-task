@@ -8,9 +8,7 @@ import lombok.Data;
 @Builder
 public class TaskModifyRequestDTO {
 
-    private Long taskNum;
     private Long projectNum;
     private String taskName;
     private String taskContent;
-    private LocalDateTime taskModifiedDt;
 }

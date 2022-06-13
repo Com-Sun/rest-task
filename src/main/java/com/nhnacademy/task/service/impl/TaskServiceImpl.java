@@ -10,6 +10,7 @@ import com.nhnacademy.task.exception.TaskNotFoundException;
 import com.nhnacademy.task.repository.ProjectRepository;
 import com.nhnacademy.task.repository.TaskRepository;
 import com.nhnacademy.task.service.TaskService;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class TaskServiceImpl implements TaskService {
         Task task = Task.builder()
             .taskCreatedMemNum(createRequestDTO.getTaskCreatedMemNum())
             .taskName(createRequestDTO.getTaskName())
-            .taskCreatedDt(createRequestDTO.getTaskCreatedDt())
+            .taskCreatedDt(LocalDateTime.now())
             .taskContent(createRequestDTO.getTaskContent())
             .project(projectRepository.findById(createRequestDTO.getProjectNum()).orElseThrow(() -> new ProjectNotFoundException("해당 프로젝트가 존재하지 않습니다.")))
             .build();
@@ -46,12 +47,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskResponseDTO updateTask(TaskModifyRequestDTO modifyRequestDto) {
+    public TaskResponseDTO updateTask(Long taskNum, TaskModifyRequestDTO modifyRequestDto) {
 
-        Task task = taskRepository.findById(modifyRequestDto.getTaskNum()).orElseThrow(() -> new TaskNotFoundException("해당 업무가 존재하지 않습니다."));
+        Task task = taskRepository.findById(taskNum).orElseThrow(() -> new TaskNotFoundException("해당 업무가 존재하지 않습니다."));
         task.setTaskContent(modifyRequestDto.getTaskContent());
         task.setTaskName(modifyRequestDto.getTaskName());
-        task.setTaskModifiedDt(modifyRequestDto.getTaskModifiedDt());
+        task.setTaskModifiedDt(LocalDateTime.now());
         taskRepository.save(task);
 
         return taskRepository.queryByTaskNum(task.getTaskNum());

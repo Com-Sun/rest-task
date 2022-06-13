@@ -14,7 +14,7 @@ public interface TaskService {
 
     TaskResponseDTO readTask(TaskReadRequestDTO readRequestDTO);
 
-    TaskResponseDTO updateTask(TaskModifyRequestDTO modifyRequestDto);
+    TaskResponseDTO updateTask(Long taskNum, TaskModifyRequestDTO modifyRequestDto);
 
     boolean deleteTask(Long taskNum);
 }

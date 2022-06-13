@@ -1,5 +1,7 @@
 package com.nhnacademy.task.service.impl;
 
+import static java.time.LocalDateTime.now;
+
 import com.nhnacademy.task.domain.dto.comment.request.CommentCreateRequestDTO;
 import com.nhnacademy.task.domain.dto.comment.request.CommentReadRequestDTO;
 import com.nhnacademy.task.domain.dto.comment.request.CommentModifyRequestDTO;
@@ -28,7 +30,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = Comment.builder()
             .task(taskRepository.findById(createRequestDTO.getTaskNum()).orElseThrow(() -> new TaskNotFoundException("해당 업무가 존재하지 않습니다.")))
             .commentContent(createRequestDTO.getCommentContent())
-            .commentCreatedDt(createRequestDTO.getCommentCreatedDt())
+            .commentCreatedDt(now())
             .memberName(createRequestDTO.getMemberName())
             .build();
 
@@ -47,10 +49,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentResponseDTO updateComment(CommentModifyRequestDTO updateRequestDTO) {
-        Comment comment = commentRepository.findById(updateRequestDTO.getCommentNum()).orElseThrow(() -> new CommentNotFoundException("해당 댓글이 존재하지 않습니다."));
+    public CommentResponseDTO updateComment(Long commentNum, CommentModifyRequestDTO updateRequestDTO) {
+        Comment comment = commentRepository.findById(commentNum).orElseThrow(() -> new CommentNotFoundException("해당 댓글이 존재하지 않습니다."));
         comment.setCommentContent(updateRequestDTO.getCommentContent());
-        comment.setCommentModifiedDt(updateRequestDTO.getCommentModifiedDt());
+        comment.setCommentModifiedDt(now());
         commentRepository.save(comment);
         return commentRepository.queryByCommentNum(comment.getCommentNum());
     }

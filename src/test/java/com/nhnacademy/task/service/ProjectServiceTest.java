@@ -75,11 +75,10 @@ class ProjectServiceTest {
         ProjectModifyRequestDTO modifyRequestDTO = ProjectModifyRequestDTO
             .builder()
             .projectName("이걸로바꾸자")
-            .projectNum(1L)
             .build();
 
-        projectService.updateProject(modifyRequestDTO);
-        verify(projectRepository, atLeastOnce()).findById(modifyRequestDTO.getProjectNum());
+        projectService.updateProject(1L, modifyRequestDTO);
+        verify(projectRepository, atLeastOnce()).findById(1L);
         verify(projectRepository, atLeastOnce()).save(any());
         verify(projectRepository, atLeastOnce()).queryByProjectNum(any());
     }

@@ -11,5 +11,4 @@ public class TaskCreateRequestDTO {
     private Long projectNum;
     private String taskName;
     private String taskContent;
-    private LocalDateTime taskCreatedDt;
 }

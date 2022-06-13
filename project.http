@@ -3,11 +3,33 @@ Host: localhost:8089
 Content-Type: application/json
 
 {
-  "projectName": "asgff"
+  "projectName": "프로젝트 가자~"
 }
 
 ###
 
 GET /projects HTTP/1.1
+Host: localhost:8089
+Content-Type: application/json
+
+###
+
+GET /projects/1 HTTP/1.1
+Host: localhost:8089
+Content-Type: application/json
+
+###
+
+PUT /projects/1 HTTP/1.1
+Host: localhost:8089
+Content-Type: application/json
+
+{
+  "projectName": "프로젝트 가볼까?"
+}
+
+###
+
+DELETE /projects/1 HTTP/1.1
 Host: localhost:8089
 Content-Type: application/json

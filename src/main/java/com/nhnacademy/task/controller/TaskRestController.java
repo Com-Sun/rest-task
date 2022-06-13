@@ -53,7 +53,7 @@ public class TaskRestController {
     public TaskResponseDTO modifyTask(@PathVariable(name = "taskNum") Long taskNum, @RequestBody
     TaskModifyRequestDTO requestDTO) {
 
-        return taskService.updateTask(requestDTO);
+        return taskService.updateTask(taskNum, requestDTO);
     }
 
     @DeleteMapping(value = "/tasks/{taskNum}")
