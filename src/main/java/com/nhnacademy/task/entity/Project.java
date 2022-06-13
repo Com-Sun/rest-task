@@ -10,16 +10,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "project")
 @Entity
+@DynamicInsert
 public class Project {
+
     @Id
     @Column(name = "project_num")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long projectNum;
 
     @Column(name = "project_name")
@@ -29,9 +31,8 @@ public class Project {
     private String projectStatus;
 
     @Builder(builderClassName = "ProjectBuilder")
-    private Project (Long projectNum, String projectName, String projectStatus) {
+    private Project (Long projectNum, String projectName) {
         this.projectNum = projectNum;
         this.projectName = projectName;
-        this.projectStatus = projectStatus;
     }
 }

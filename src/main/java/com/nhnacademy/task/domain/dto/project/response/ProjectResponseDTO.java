@@ -1,4 +1,4 @@
-package com.nhnacademy.task.domain.dto.response;
+package com.nhnacademy.task.domain.dto.project.response;
 
 public interface ProjectResponseDTO {
     Long getProjectNum();

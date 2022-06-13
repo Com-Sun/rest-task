@@ -30,12 +30,8 @@ class TaskRepositoryTest {
     void setUp() {
         project = Project.builder()
             .projectName("Hyunjin Project")
-            .projectStatus("활성")
+            .projectNum(1L)
             .build();
-
-
-
-
     }
 
     @Test

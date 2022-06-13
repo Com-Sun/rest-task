@@ -2,7 +2,7 @@ package com.nhnacademy.task.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.nhnacademy.task.domain.dto.response.ProjectResponseDTO;
+import com.nhnacademy.task.domain.dto.project.response.ProjectResponseDTO;
 import com.nhnacademy.task.entity.Project;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +21,8 @@ class ProjectRepositoryTest {
     @BeforeEach
     void setUp() {
         project = Project.builder()
+            .projectNum(1L)
             .projectName("Hyunjin Project")
-            .projectStatus("활성")
             .build();
         projectRepository.save(project);
     }
@@ -31,6 +31,6 @@ class ProjectRepositoryTest {
     public void findByProjectNameTest() {
         ProjectResponseDTO responseDTO = projectRepository.findByProjectName("Hyunjin Project");
         assertThat(responseDTO).isNotNull();
-        assertThat(responseDTO.getProjectStatus()).isEqualTo("활성");
+        assertThat(responseDTO.getProjectStatus()).isEqualTo("active");
     }
 }

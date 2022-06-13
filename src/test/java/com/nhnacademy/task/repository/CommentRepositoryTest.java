@@ -31,8 +31,8 @@ class CommentRepositoryTest {
     @BeforeEach
     void setUp() {
         project = Project.builder()
+            .projectNum(1L)
             .projectName("Hyunjin Project")
-            .projectStatus("활성")
             .build();
         projectRepository.save(project);
 
