@@ -58,5 +58,4 @@ public class ProjectRestController {
         return projectService.deleteProject(projectNum);
     }
 
-
 }

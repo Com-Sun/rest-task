@@ -37,7 +37,6 @@ class CommentServiceTest {
 
     private Comment comment;
 
-
     @BeforeEach
     void setUp() {
         project= Project.builder()
