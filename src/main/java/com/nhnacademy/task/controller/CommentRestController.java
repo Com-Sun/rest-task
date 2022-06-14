@@ -28,20 +28,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentRestController {
 
     private final CommentService commentService;
-    private final TaskService taskService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/comments")
+    @PostMapping(value = "/projects/{project-num}/tasks/{task-num}/comments")
     public CommentResponseDTO createComment(@RequestBody CommentCreateRequestDTO requestDTO) {
+
         return commentService.createComment(requestDTO);
     }
 
-    @GetMapping(value = "/comments")
+    @GetMapping(value = "/projects/{project-num}/tasks/{task-num}/comments")
     public List<CommentResponseDTO> readAllComments() {
+
         return commentService.readAllComments();
     }
 
-    @GetMapping(value = "/comments/{commentNum}")
+    @GetMapping(value = "/projects/{project-num}/tasks/{task-num}/comments/{commentNum}")
     public CommentResponseDTO readComment(@PathVariable(name = "commentNum") Long commentNum) {
 
         return commentService.readComment(CommentReadRequestDTO.builder()
@@ -49,15 +50,16 @@ public class CommentRestController {
             .build());
     }
 
-    @PutMapping(value = "/comments/{commentNum}")
-    public CommentResponseDTO modifyComment(@PathVariable(name = "commentNum") Long commentNum, @RequestBody
-    CommentModifyRequestDTO requestDTO) {
+    @PutMapping(value = "/projects/{project-num}/tasks/{task-num}/comments/{commentNum}")
+    public CommentResponseDTO modifyComment(@PathVariable(name = "commentNum") Long commentNum,
+                                            @RequestBody CommentModifyRequestDTO requestDTO) {
 
         return commentService.updateComment(commentNum, requestDTO);
     }
 
-    @DeleteMapping(value = "/comments/{commentNum}")
+    @DeleteMapping(value = "/projects/{project-num}/tasks/{task-num}/comments/{commentNum}")
     public boolean deleteComment(@PathVariable(name = "commentNum") Long commentNum) {
+
         return commentService.deleteComment(commentNum);
     }
 

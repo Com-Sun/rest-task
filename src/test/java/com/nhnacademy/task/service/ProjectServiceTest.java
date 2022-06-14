@@ -59,6 +59,9 @@ class ProjectServiceTest {
 
     @Test
     void readProjectTest() {
+        given(projectRepository.findById(any()))
+            .willReturn(Optional.of(project));
+
         ProjectReadRequestDTO readRequestDTO = ProjectReadRequestDTO.builder()
             .ProjectNum(1L)
             .build();

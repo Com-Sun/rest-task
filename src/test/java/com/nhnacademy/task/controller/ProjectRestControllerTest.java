@@ -1,6 +1,7 @@
 package com.nhnacademy.task.controller;
 
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -74,6 +75,15 @@ class ProjectRestControllerTest {
                 get("/projects/{projectNum}", 1L)
             ).andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @DisplayName("API - 사용자가 이상한 url 요청시 ProjectNotFound 예외처리 테스트")
+    @Test
+    void readProjectThrowsProjectNotFoundTest() throws Exception {
+        assertThatThrownBy(() -> mvc.perform(
+            get("/projects/{projectNum}", 2346L)
+        )).hasMessageContaining("해당 프로젝트가 존재하지 않습니다.");
+
     }
 
     @DisplayName("API - 프로젝트 수정 테스트")

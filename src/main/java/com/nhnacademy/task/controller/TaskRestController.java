@@ -1,10 +1,5 @@
 package com.nhnacademy.task.controller;
 
-import com.nhnacademy.task.domain.dto.comment.request.CommentCreateRequestDTO;
-import com.nhnacademy.task.domain.dto.project.request.ProjectCreateRequestDTO;
-import com.nhnacademy.task.domain.dto.project.request.ProjectModifyRequestDTO;
-import com.nhnacademy.task.domain.dto.project.request.ProjectReadRequestDTO;
-import com.nhnacademy.task.domain.dto.project.response.ProjectResponseDTO;
 import com.nhnacademy.task.domain.dto.task.request.TaskCreateRequestDTO;
 import com.nhnacademy.task.domain.dto.task.request.TaskModifyRequestDTO;
 import com.nhnacademy.task.domain.dto.task.request.TaskReadRequestDTO;
@@ -31,33 +26,36 @@ public class TaskRestController {
     private final ProjectService projectService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/tasks")
+    @PostMapping(value = "/projects/{project-num}/tasks")
     public TaskResponseDTO createProject(@RequestBody TaskCreateRequestDTO requestDTO) {
+
         return taskService.createTask(requestDTO);
     }
 
-    @GetMapping(value = "/tasks")
+    @GetMapping(value = "/projects/{project-num}/tasks")
     public List<TaskResponseDTO> readAllProjects() {
+
         return taskService.readAllTask();
     }
 
-    @GetMapping(value = "/tasks/{taskNum}")
+    @GetMapping(value = "/projects/{project-num}/tasks/{taskNum}")
     public TaskResponseDTO readProject(@PathVariable(name = "taskNum") Long taskNum) {
 
         return taskService.readTask(TaskReadRequestDTO.builder()
-                .taskNum(taskNum)
+            .taskNum(taskNum)
             .build());
     }
 
-    @PutMapping(value = "/tasks/{taskNum}")
+    @PutMapping(value = "/projects/{project-num}/tasks/{taskNum}")
     public TaskResponseDTO modifyTask(@PathVariable(name = "taskNum") Long taskNum, @RequestBody
     TaskModifyRequestDTO requestDTO) {
 
         return taskService.updateTask(taskNum, requestDTO);
     }
 
-    @DeleteMapping(value = "/tasks/{taskNum}")
+    @DeleteMapping(value = "/projects/{project-num}/tasks/{taskNum}")
     public boolean deleteProject(@PathVariable(name = "taskNum") Long taskNum) {
+
         return taskService.deleteTask(taskNum);
     }
 }

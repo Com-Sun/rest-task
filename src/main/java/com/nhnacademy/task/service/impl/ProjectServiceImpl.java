@@ -37,8 +37,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectResponseDTO readProject(ProjectReadRequestDTO projectReadRequestDTO) {
-
-        return projectRepository.queryByProjectNum(projectReadRequestDTO.getProjectNum());
+        Project project = projectRepository.findById(projectReadRequestDTO.getProjectNum()).orElseThrow(() -> new ProjectNotFoundException("해당 프로젝트가 존재하지 않습니다."));
+        return projectRepository.queryByProjectNum(project.getProjectNum());
     }
 
     @Override

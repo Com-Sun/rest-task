@@ -43,7 +43,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponseDTO readTask(TaskReadRequestDTO readRequestDTO) {
-        return taskRepository.queryByTaskNum(readRequestDTO.getTaskNum());
+        Task task = taskRepository.findById(readRequestDTO.getTaskNum()).orElseThrow(() -> new TaskNotFoundException("해당 업무가 존재하지 않습니다."));
+        return taskRepository.queryByTaskNum(task.getTaskNum());
     }
 
     @Override

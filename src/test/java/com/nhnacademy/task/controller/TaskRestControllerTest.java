@@ -1,6 +1,7 @@
 package com.nhnacademy.task.controller;
 
 import static java.time.LocalDateTime.now;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
@@ -105,6 +106,15 @@ class TaskRestControllerTest {
                 get("/tasks/{taskNum}", 1L)
             ).andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @DisplayName("API - taskNotFoundExceptionTest")
+    @Test
+    void readTaskThrowsTaskNotRoundExceptionTest() throws Exception {
+        assertThatThrownBy(() -> this.mvc.perform(
+            get("/tasks/{taskNum}", 8274L)
+        )).hasMessageContaining("해당 업무가 존재하지 않습니다.");
+
     }
 
     @DisplayName("API - task 수정 테스트")

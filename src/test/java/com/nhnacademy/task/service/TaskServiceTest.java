@@ -76,6 +76,9 @@ class TaskServiceTest {
 
     @Test
     void readTask() {
+        given(taskRepository.findById(any()))
+            .willReturn(Optional.ofNullable(task));
+
         TaskReadRequestDTO taskReadRequestDTO = TaskReadRequestDTO.builder()
             .taskNum(1L)
             .build();

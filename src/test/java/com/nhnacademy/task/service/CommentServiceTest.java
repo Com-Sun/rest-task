@@ -85,6 +85,9 @@ class CommentServiceTest {
 
     @Test
     void readComment() {
+        given(commentRepository.findById(any()))
+            .willReturn(Optional.ofNullable(comment));
+
         CommentReadRequestDTO readRequestDTO = CommentReadRequestDTO.builder()
             .commentNum(1L)
             .build();
