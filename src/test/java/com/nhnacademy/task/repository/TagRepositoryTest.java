@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.nhnacademy.task.domain.dto.response.TagResponseDTO;
 import com.nhnacademy.task.entity.Project;
 import com.nhnacademy.task.entity.Tag;
+import com.nhnacademy.task.entity.Task;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,18 +20,31 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 class TagRepositoryTest {
 
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
     @Autowired
-    TagRepository tagRepository;
+    private TagRepository tagRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
+
     private Project project;
+    private Task task;
 
     @BeforeEach
     void setUp() {
         project = Project.builder()
             .projectName("Hyunjin Project")
-            .projectNum(1L)
             .build();
-        projectRepository.save(project);
+        projectRepository.saveAndFlush(project);
+
+        task = Task.builder()
+            .project(project)
+            .taskContent("일할시간")
+            .taskCreatedDt(LocalDateTime.now())
+            .taskName("현진아")
+            .taskCreatedMemNum(1L)
+            .build();
+        taskRepository.saveAndFlush(task);
     }
 
     @Test
@@ -37,7 +52,7 @@ class TagRepositoryTest {
         Tag tag = Tag.builder()
             .pk(new Tag.Pk("가즈아~", project.getProjectNum()))
             .project(project)
-            .taskNum(1L)
+            .task(task)
             .build();
         tagRepository.save(tag);
 

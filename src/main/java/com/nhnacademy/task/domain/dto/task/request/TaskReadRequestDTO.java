@@ -1,4 +1,4 @@
-package com.nhnacademy.task.domain.dto.project.request;
+package com.nhnacademy.task.domain.dto.task.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ProjectModifyRequestDTO {
-
-    private String projectName;
+public class TaskReadRequestDTO {
+    private Long taskNum;
 }

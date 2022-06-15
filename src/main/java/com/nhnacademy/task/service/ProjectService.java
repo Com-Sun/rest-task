@@ -14,7 +14,7 @@ public interface ProjectService {
 
     ProjectResponseDTO readProject(ProjectReadRequestDTO projectReadRequestDTO);
 
-    ProjectResponseDTO updateProject(ProjectModifyRequestDTO projectModifyRequestDTO);
+    ProjectResponseDTO updateProject(Long projectNum, ProjectModifyRequestDTO projectModifyRequestDTO);
 
     boolean deleteProject(Long projectNum);
 

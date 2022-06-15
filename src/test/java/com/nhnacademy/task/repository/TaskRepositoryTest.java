@@ -3,7 +3,7 @@ package com.nhnacademy.task.repository;
 import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.nhnacademy.task.domain.dto.response.TaskResponseDTO;
+import com.nhnacademy.task.domain.dto.task.response.TaskResponseDTO;
 import com.nhnacademy.task.entity.Project;
 import com.nhnacademy.task.entity.Task;
 import java.util.List;
@@ -18,9 +18,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 class TaskRepositoryTest {
 
     @Autowired
-    TaskRepository taskRepository;
+    private TaskRepository taskRepository;
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
     private Project project;
     private Task task;
@@ -30,7 +30,6 @@ class TaskRepositoryTest {
     void setUp() {
         project = Project.builder()
             .projectName("Hyunjin Project")
-            .projectNum(1L)
             .build();
     }
 

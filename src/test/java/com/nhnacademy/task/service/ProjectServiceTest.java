@@ -24,13 +24,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 class ProjectServiceTest {
 
     @Autowired
-    ProjectService projectService;
+    private ProjectService projectService;
 
     @MockBean
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
-    Project project;
-    ProjectCreateRequestDTO projectCreateRequestDTO;
+    private Project project;
+    private ProjectCreateRequestDTO projectCreateRequestDTO;
 
 
     @BeforeEach
@@ -42,7 +42,6 @@ class ProjectServiceTest {
         projectCreateRequestDTO = ProjectCreateRequestDTO.builder()
             .projectName("현진아 가즈아")
             .build();
-
 
     }
 
@@ -60,6 +59,9 @@ class ProjectServiceTest {
 
     @Test
     void readProjectTest() {
+        given(projectRepository.findById(any()))
+            .willReturn(Optional.of(project));
+
         ProjectReadRequestDTO readRequestDTO = ProjectReadRequestDTO.builder()
             .ProjectNum(1L)
             .build();
@@ -76,11 +78,10 @@ class ProjectServiceTest {
         ProjectModifyRequestDTO modifyRequestDTO = ProjectModifyRequestDTO
             .builder()
             .projectName("이걸로바꾸자")
-            .projectNum(1L)
             .build();
 
-        projectService.updateProject(modifyRequestDTO);
-        verify(projectRepository, atLeastOnce()).findById(modifyRequestDTO.getProjectNum());
+        projectService.updateProject(1L, modifyRequestDTO);
+        verify(projectRepository, atLeastOnce()).findById(1L);
         verify(projectRepository, atLeastOnce()).save(any());
         verify(projectRepository, atLeastOnce()).queryByProjectNum(any());
     }

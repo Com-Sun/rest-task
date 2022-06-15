@@ -15,13 +15,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 class ProjectRepositoryTest {
 
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
     private Project project;
 
     @BeforeEach
     void setUp() {
         project = Project.builder()
-            .projectNum(1L)
             .projectName("Hyunjin Project")
             .build();
         projectRepository.save(project);

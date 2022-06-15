@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.nhnacademy.task.domain.dto.response.MilestoneResponseDTO;
 import com.nhnacademy.task.entity.Milestone;
 import com.nhnacademy.task.entity.Project;
+import com.nhnacademy.task.entity.Task;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,28 +20,41 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 class MilestoneRepositoryTest {
 
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
     @Autowired
-    MilestoneRepository milestoneRepository;
+    private MilestoneRepository milestoneRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
+
     private Project project;
+    private Task task;
 
     @BeforeEach
     void setUp() {
         project = Project.builder()
             .projectName("Hyunjin Project")
-            .projectNum(1L)
+            .build();
+
+        task = Task.builder()
+            .project(project)
+            .taskContent("일할시간")
+            .taskCreatedDt(LocalDateTime.now())
+            .taskName("현진아")
+            .taskCreatedMemNum(1L)
             .build();
     }
 
     @Test
     void findByPk_ProjectNumTest() {
         projectRepository.saveAndFlush(project);
+        taskRepository.saveAndFlush(task);
 
         Milestone milestone = Milestone.builder()
             .pk(new Milestone.Pk("안녕", project.getProjectNum()))
             .project(project)
             .milestoneStatus("활성")
-            .taskNum(1L)
+            .task(task)
             .milestoneStartDate(now())
             .milestoneEndDate(now())
             .build();

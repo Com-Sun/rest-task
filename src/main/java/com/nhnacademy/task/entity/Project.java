@@ -22,6 +22,7 @@ public class Project {
 
     @Id
     @Column(name = "project_num")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long projectNum;
 
     @Column(name = "project_name")
@@ -31,8 +32,7 @@ public class Project {
     private String projectStatus;
 
     @Builder(builderClassName = "ProjectBuilder")
-    private Project (Long projectNum, String projectName) {
-        this.projectNum = projectNum;
+    private Project (String projectName) {
         this.projectName = projectName;
     }
 }
